@@ -35,85 +35,89 @@ class _HomeDashboardState extends State<HomeDashboard> {
           AnimatedContainer(
             color: app_purple,
             duration: Duration(milliseconds: 500),
-            height: !searchFocusNode.hasFocus ? 170 : 150,
+            height: !searchFocusNode.hasFocus ? 170 : 110,
             child: Column(
               children: [
-                AnimatedOpacity(
+                AnimatedContainer(
+                  height: !searchFocusNode.hasFocus ? 100 : 50,
                   duration: Duration(milliseconds: 500),
-                  opacity: !searchFocusNode.hasFocus ? 1.0 : 0.0,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 58.0, right: 20, left: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Profile picture, location
-                        Row(
-                          children: [
-                            Container(
-                              height: 40,
-                              width: 40,
-                              child: Image.asset(manimg),
-                            ),
-                            SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.send,
-                                        color: Colors.white, size: 10),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      'Your location',
-                                      style: TextStyle(
-                                          fontSize: 12, color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Wertheimer, Illinois',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
+                  child: AnimatedOpacity(
+                    duration: Duration(milliseconds: 500),
+                    opacity: !searchFocusNode.hasFocus ? 1.0 : 0.0,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(top: 58.0, right: 20, left: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Profile picture, location
+                          Row(
+                            children: [
+                              Container(
+                                height: 40,
+                                width: 40,
+                                child: Image.asset(manimg),
+                              ),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(Icons.send,
+                                          color: Colors.white, size: 10),
+                                      SizedBox(
+                                        width: 5,
                                       ),
-                                    ),
-                                    Icon(Icons.keyboard_arrow_down_outlined,
-                                        color: Colors.white, size: 19),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        // Notification icon
-                        Container(
-                          height: 35,
-                          width: 35,
-                          child: SvgPicture.asset(dbell),
-                        ),
-                      ],
+                                      Text(
+                                        'Your location',
+                                        style: TextStyle(
+                                            fontSize: 12, color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Wertheimer, Illinois',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Icon(Icons.keyboard_arrow_down_outlined,
+                                          color: Colors.white, size: 19),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          // Notification icon
+                          Container(
+                            height: 35,
+                            width: 35,
+                            child: SvgPicture.asset(dbell),
+                          ),
+                        ],
 
+                      ),
                     ),
                   ),
                 ),
                 AnimatedPadding(
-                  padding: searchFocusNode.hasFocus
-                      ? EdgeInsets.only(left: paddvalue , bottom: paddvalue,right: paddvalue)
-                      : EdgeInsets.only(left: 20,right: 20, top: 15),
+                  padding: !searchFocusNode.hasFocus
+                      ? EdgeInsets.only(left: 20 , bottom: paddvalue,right: 20,top: 10)
+                      : EdgeInsets.only(left: 15,right: 20, top: !searchFocusNode.hasFocus ? 15 : 0),
                   duration: Duration(milliseconds: 500),
                   child: Row(
                     children: [
                       searchFocusNode.hasFocus
                           ? AnimatedOpacity(
-                              duration: Duration(milliseconds: 600),
-                              opacity: searchFocusNode.hasFocus ? 1.0 : 0.0,
+                              duration: Duration(milliseconds: 1500),
+                              opacity: !searchFocusNode.hasFocus ? 0.0 : 1.0,
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -131,7 +135,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 18.0),
@@ -147,7 +151,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                     child: TextField(
                                       focusNode: searchFocusNode,
                                       decoration: InputDecoration(
-                                        hintText: 'Enter the receipt number...',
+                                        hintText: !searchFocusNode.hasFocus ?'Enter the receipt number...' : "",
                                         border: InputBorder.none,
                                         hintStyle:
                                             TextStyle(color: Colors.grey),
@@ -155,17 +159,22 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                     ),
                                   ),
                                 ),
+                                Container(height: 35,width: 50,
+                                  child: SvgPicture.asset(sideicon),)
+
                               ],
                             ),
                           ),
                         ),
                       ),
+                      
                     ],
 
                   ),
                 ),
-
               ],
+
+
             ),
           ),
         ],

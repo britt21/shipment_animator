@@ -51,52 +51,20 @@ class _DummyHomeState extends State<DummyHome> {
              "Click me",),
             ) ),
 
-            AnimatedPositioned(
-              height: selected ? 900 : 110,
-              width: selected ? 900 : 110,
-              top: selected ? 900 : 110,
-              curve: Curves.fastOutSlowIn,
+
+            Container(height: 170,color: Colors.black,
+              child: Column(children: [
+                Container(
+                  height: 90,color: Colors.blue,
+                child:                  Container(
+                  height: 20,color: Colors.red,)
+                  ,),
 
 
-              duration: Duration(seconds: 1),
-              child: GestureDetector(
-                onTap: (){
-                  setState(() {
-                    selected = !selected;
 
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Container(
 
-                    height: 100.0,width: MediaQuery.of(context).size.width,
-                  color: app_purple,),
-                ),
-              ),
-            ),
-
-             GestureDetector(
-               onTap: (){
-                 setState(() {
-                   print("CLICKEDOBBSERVENODER ${searchFocusNode.hasFocus}");
-
-                 });
-               },
-               child: TextField(
-                 onChanged: (value){
-                   print("editCLICKEDOBBSERVENODER ${searchFocusNode.hasFocus}");
-
-                 },
-                focusNode: searchFocusNode,
-                decoration: InputDecoration(
-                  hintText: 'Enter the receipt number...',
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-            ),
-             ),
-
+              ],),
+            )
           ],
         ),
       ),
