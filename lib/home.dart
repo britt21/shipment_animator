@@ -33,6 +33,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: litwhite,
 
       body: SingleChildScrollView(
