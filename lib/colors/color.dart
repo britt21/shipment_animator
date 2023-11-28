@@ -9,6 +9,8 @@ var btn_color = Color(0xFFCCC5EA);
 var appbarbg = Color(0xFFCCC5EA);
 var etbg = Color(0xFFEEEBFC);
 var etbglit = Color(0xFFF4F3FF);
+var litwhite= Color(0xFAFFFFFF);
+
 
 
 // Tuc20232$
