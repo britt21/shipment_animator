@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:shipment_delivery_app/ui/search_history.dart';
 import 'package:shipment_delivery_app/ui/widget.dart';
 import 'colors/color.dart';
 import 'drawable/pngs.dart';
@@ -41,15 +44,15 @@ class _HomeDashboardState extends State<HomeDashboard> {
           children: [
             AnimatedContainer(
               color: app_purple,
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 800),
               height: !searchFocusNode.hasFocus ? 170 : 110,
               child: Column(
                 children: [
                   AnimatedContainer(
                     height: !searchFocusNode.hasFocus ? 100 : 50,
-                    duration: Duration(milliseconds: 500),
+                    duration: Duration(milliseconds: 800),
                     child: AnimatedOpacity(
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 800),
                       opacity: !searchFocusNode.hasFocus ? 1.0 : 0.0,
                       child: Padding(
                         padding:
@@ -81,7 +84,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                           Text(
                                             'Your location',
                                             style: TextStyle(
-                                                fontSize: 12, color: Colors.white),
+                                                fontSize: 12,
+                                                color: Colors.white),
                                           ),
                                         ],
                                       ),
@@ -97,7 +101,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                               color: Colors.white,
                                             ),
                                           ),
-                                          Icon(Icons.keyboard_arrow_down_outlined,
+                                          Icon(Icons
+                                              .keyboard_arrow_down_outlined,
                                               color: Colors.white, size: 19),
                                         ],
                                       ),
@@ -125,7 +130,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         left: 15,
                         right: 20,
                         top: !searchFocusNode.hasFocus ? 15 : 0),
-                    duration: Duration(milliseconds: 500),
+                    duration: Duration(milliseconds: 800),
                     child: Row(
                       children: [
                         searchFocusNode.hasFocus
@@ -192,7 +197,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
               ),
             ),
             SizedBox(height: 10,),
-           !searchFocusNode.hasFocus ?  Column(children: [
+            !searchFocusNode.hasFocus ? Column(children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, left: 20, right: 20),
                 child: Row(
@@ -240,7 +245,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                 Text(
                                   "NJEOENIN222S33383",
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 13),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13),
                                 ),
                               ],
                             ),
@@ -287,9 +293,10 @@ class _HomeDashboardState extends State<HomeDashboard> {
                 padding: const EdgeInsets.only(top: 10.0, left: 20, right: 20),
                 child: Row(
                   children: [
-                    Text("Available Vehicles", style: TextStyle(color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),),
+                    Text("Available Vehicles",
+                      style: TextStyle(color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),),
                   ],
                 ),
 
@@ -298,7 +305,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
               Container(height: 200,
                   child: ListView.builder(itemBuilder: (context, index) {
                     return Container(
-                      decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
                       height: 100,
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -308,7 +316,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
                             Text("Ocean flight"),
                             Row(
                               children: [
-                                Text("Internstional",style: TextStyle(fontSize: 11),),
+                                Text("Internstional",
+                                  style: TextStyle(fontSize: 11),),
                               ],
                             ),
                             Container(
@@ -319,16 +328,34 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         ),
                       ),
                     );
-                  }, itemCount: 9,scrollDirection: Axis.horizontal,
+                  }, itemCount: 9, scrollDirection: Axis.horizontal,
 
                   )
 
 
-
               )
-            ],):
-            Text("HELLO")
-            
+            ],) :
+
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 28.0, left: 15, right: 15, bottom: 10),
+              child: Container(height: 350,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), color: litwhite,),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 18.0, bottom: 18),
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      // Set padding to EdgeInsets.zero
+
+                      itemBuilder: (context, index) {
+                        return
+                          Searchlist();
+                      }
+                  ),
+                ),
+              ),
+            ),
 
 
           ],
@@ -363,22 +390,49 @@ class _HomeDashboardState extends State<HomeDashboard> {
             showUnselectedLabels: true,
           ),
           AnimatedPositioned(
-            duration: Duration(milliseconds: 400),
+            duration: Duration(milliseconds: 800),
             top: 0,
-            left: (MediaQuery.of(context).size.width / 4) * selectedTabIndex,
+            left: (MediaQuery
+                .of(context)
+                .size
+                .width / 4) * selectedTabIndex,
             child: Container(
-              width: MediaQuery.of(context).size.width / 4,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width / 4,
               height: 2,
               color: app_purple_deep,
             ),
           ),
         ],
       ),
-        );
+    );
   }
+
   void onTabSelected(int index) {
     setState(() {
       selectedTabIndex = index;
+
+      print("CURRPOS: ${selectedTabIndex}");
+      switch (selectedTabIndex) {
+        case 0:
+          break;
+
+        case 1:
+
+          break;
+
+        case 2:
+          Future.delayed(Duration(milliseconds: 600), ()
+          {
+
+            Get.to(() => HistoryHome(), transition: Transition.fadeIn,
+                duration: Duration(milliseconds: 600));
+          });
+          break;
+
+      }
     });
   }
 }

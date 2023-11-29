@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shipment_delivery_app/home.dart';
 import 'package:shipment_delivery_app/ui/Demohome.dart';
+
+import 'colors/color.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +16,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: app_purple,
+    ));
     return GetMaterialApp(
+
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
