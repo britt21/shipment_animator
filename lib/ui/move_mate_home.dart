@@ -16,6 +16,9 @@ class MoveMateHome extends StatefulWidget {
 }
 
 class _MoveMateHomeState extends State<MoveMateHome> {
+
+  int totalAmount = 14850; // Replace with your initial total amount
+
   @override
   Widget build(BuildContext context) {
     // Set the status bar color
@@ -39,6 +42,7 @@ class _MoveMateHomeState extends State<MoveMateHome> {
           automaticallyImplyLeading: false, // Disable back arrow
           flexibleSpace: SingleChildScrollView(
             child: Container(
+
               decoration: BoxDecoration(),
             ),
           ),
@@ -67,14 +71,8 @@ class _MoveMateHomeState extends State<MoveMateHome> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "\$14000",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.green,
-                    ),
-                  ),
+                  MoneyCountAnimation(targetAmount: totalAmount),
+
                   Text(
                     " USD",
                     style: TextStyle(
@@ -132,5 +130,40 @@ class _MoveMateHomeState extends State<MoveMateHome> {
         )
     );
     super.dispose();
+  }
+}
+
+
+
+class MoneyCountAnimation extends StatefulWidget {
+  final int targetAmount;
+
+  MoneyCountAnimation({required this.targetAmount});
+
+  @override
+  _MoneyCountAnimationState createState() => _MoneyCountAnimationState();
+}
+
+class _MoneyCountAnimationState extends State<MoneyCountAnimation> {
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder(
+      duration: Duration(seconds: 2),
+      tween: IntTween(
+        begin: 0,
+        end: widget.targetAmount,
+      ),
+      builder: (BuildContext context, int value, Widget? child) {
+        String formattedValue = '\$$value';
+        return Text(
+          formattedValue,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            color: Colors.green,
+          ),
+        );
+      },
+    );
   }
 }
