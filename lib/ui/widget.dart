@@ -147,135 +147,186 @@ class Searchlist extends StatelessWidget {
     );
   }
 }
-class AnimatedShipmentHistoryContainer extends StatefulWidget {
-  @override
-  _AnimatedShipmentHistoryContainerState createState() =>
-      _AnimatedShipmentHistoryContainerState();
-}
-
-class _AnimatedShipmentHistoryContainerState
-    extends State<AnimatedShipmentHistoryContainer> {
-  final ScrollController _scrollController = ScrollController();
-  double _opacity = 1.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-  }
-
-  void _onScroll() {
-    // Calculate opacity based on scroll offset or any other logic you want
-    double opacity = 1.0 - (_scrollController.offset / 100);
-    opacity = opacity.clamp(0.0, 1.0); // Ensure opacity is between 0.0 and 1.0
-    setState(() {
-      _opacity = opacity;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      child: ShipmentHistoryContainer(),
-    );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-}
 
 
 class ShipmentHistoryContainer extends StatelessWidget {
-  const ShipmentHistoryContainer({super.key});
+  final paddvalue;
+   ShipmentHistoryContainer({required this.paddvalue });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.white),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 15),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+    return AnimatedPadding(
+      padding: EdgeInsets.only(top: paddvalue),
+      duration: Duration(milliseconds: 700),
+
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 10.0),
+        child: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20, top: 15),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          height: 20, width: 15, child: SvgPicture.asset(recycle)),
+                      Text(
+                        " in-progress",
+                        style: TextStyle(color: green),
+                      ),
+                    ],
+                  ),
+                  height: 25,
+                  width: 120,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25), color: litterwhite),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 20, right: 35, bottom: 15, top: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                        height: 20, width: 15, child: SvgPicture.asset(recycle)),
-                    Text(
-                      " in-progress",
-                      style: TextStyle(color: green),
+                    Row(
+                      children: [
+                        Text(
+                          "Arriving Today!",
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Your Delivery, #N1289282821\nfrom atlanta, is ariving today",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                                height: 60,
+                                width: 60,
+                                child: SvgPicture.asset(esybox))
+                          ],
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "\$1000 USD - ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: app_purple_deep,
+                              fontSize: 12),
+                        ),
+                        Text(
+                          "Sep 23,2023",
+                          style: TextStyle(color: app_purple_deep, fontSize: 12),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                height: 25,
-                width: 120,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25), color: litterwhite),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 20, right: 35, bottom: 15, top: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Arriving Today!",
-                        style:
-                            TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Your Delivery, #N1289282821\nfrom atlanta, is ariving today",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                              height: 60,
-                              width: 60,
-                              child: SvgPicture.asset(esybox))
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "\$1000 USD - ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: app_purple_deep,
-                            fontSize: 12),
-                      ),
-                      Text(
-                        "Sep 23,2023",
-                        style: TextStyle(color: app_purple_deep, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+
+
+
+class ChipGroupOne extends StatefulWidget {
+  @override
+  _ChipGroupOneState createState() => _ChipGroupOneState();
+}
+
+class _ChipGroupOneState extends State<ChipGroupOne> {
+  List<String> chipTitles = ['Document', 'Glass', 'Liquid', 'Food'];
+  List<bool> isSelected = List.generate(4, (index) => false);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(chipTitles.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: FilterChip(
+              label: Text(
+                chipTitles[index],
+                style: TextStyle(color: isSelected[index] ? Colors.white : Colors.black, fontWeight: FontWeight.w300),
+              ),
+              selected: isSelected[index],
+              onSelected: (bool selected) {
+                setState(() {
+                  isSelected[index] = selected;
+                });
+              },
+              backgroundColor: isSelected[index] ? deepblu : Colors.white,
+              selectedColor: deepblu,
+              checkmarkColor: Colors.white,
+              showCheckmark: isSelected[index],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class ChipGroupTwo extends StatefulWidget {
+  @override
+  _ChipGroupTwoState createState() => _ChipGroupTwoState();
+}
+
+class _ChipGroupTwoState extends State<ChipGroupTwo> {
+  List<String> chipTitles = ['Electronic', 'Product', 'Others'];
+  List<bool> isSelected = List.generate(3, (index) => false);
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(chipTitles.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: FilterChip(
+              label: Text(
+                chipTitles[index],
+                style: TextStyle(color: isSelected[index] ? Colors.white : Colors.black, fontWeight: FontWeight.w300),
+              ),
+              selected: isSelected[index],
+              onSelected: (bool selected) {
+                setState(() {
+                  isSelected[index] = selected;
+                });
+              },
+              backgroundColor: isSelected[index] ? deepblu : Colors.white,
+              selectedColor: deepblu,
+              checkmarkColor: Colors.white,
+              showCheckmark: isSelected[index],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+

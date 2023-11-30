@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shipment_delivery_app/home.dart';
 import 'package:shipment_delivery_app/ui/Demohome.dart';
+import 'package:shipment_delivery_app/ui/search_history.dart';
 
 import 'colors/color.dart';
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
       statusBarColor: app_purple,
     ));
     return GetMaterialApp(
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  DummyHome(),
+      home:  HomeDashboard(),
     );
   }
 }

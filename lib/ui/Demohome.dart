@@ -27,7 +27,7 @@ class _DummyHomeState extends State<DummyHome> {
   void initState() {
     searchFocusNode.addListener(() {
       setState(() {
-        paddvalue = paddvalue == 0.0 ? 50.0: 0.0;
+        paddvalue = paddvalue == 0.0 ? 30.0: 0.0;
       });
     });
     super.initState();

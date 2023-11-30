@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shipment_delivery_app/ui/calculate_home.dart';
 import 'package:shipment_delivery_app/ui/search_history.dart';
 import 'package:shipment_delivery_app/ui/widget.dart';
 import 'colors/color.dart';
@@ -22,6 +23,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
   bool isBoatMoved = false;
   int selectedTabIndex = 0;
 
+
   @override
   void initState() {
     searchFocusNode.addListener(() {
@@ -31,6 +33,17 @@ class _HomeDashboardState extends State<HomeDashboard> {
         paddvalue = paddvalue == 0.0 ? 10.0 : 0.0;
       });
     });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setState(() {
+        selectedTabIndex = 0;
+      });
+    }
+    // This block will be executed when the app is resumed (comes to the foreground)
+    print("App resumed");
   }
 
   @override
@@ -410,10 +423,11 @@ class _HomeDashboardState extends State<HomeDashboard> {
     );
   }
 
+
+
   void onTabSelected(int index) {
     setState(() {
       selectedTabIndex = index;
-
       print("CURRPOS: ${selectedTabIndex}");
       switch (selectedTabIndex) {
         case 0:
@@ -421,14 +435,18 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
         case 1:
 
+          Future.delayed(Duration(milliseconds: 300), ()
+          {
+            Get.to(() => CalculateHome(), transition: Transition.fadeIn,
+                duration: Duration(milliseconds: 300));
+          });
           break;
 
         case 2:
-          Future.delayed(Duration(milliseconds: 600), ()
+          Future.delayed(Duration(milliseconds: 300), ()
           {
-
             Get.to(() => HistoryHome(), transition: Transition.fadeIn,
-                duration: Duration(milliseconds: 600));
+                duration: Duration(milliseconds: 300));
           });
           break;
 

@@ -12,3 +12,7 @@ const recycle = "assets/image/svg/recycle.svg";
 const brella = "assets/image/svg/brella.svg";
 const pbox = "assets/image/svg/pbox.svg";
 const esybox = "assets/image/svg/esybox.svg";
+const upload = "assets/image/svg/upload.svg";
+const download = "assets/image/svg/download.svg";
+const scale = "assets/image/svg/scale.svg";
+const movemate = "assets/image/svg/movematelogo.svg";
