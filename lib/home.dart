@@ -26,6 +26,19 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
 
   @override
+  void didPop() {
+    // Trigger a rebuild when returning to the home screen
+    ModalRoute.of(context)?.addLocalHistoryEntry(LocalHistoryEntry(
+      onRemove: () {
+        setState(() {
+          // Update selectedTabIndex when popping back
+          selectedTabIndex = 0;
+        });
+      },
+    ));
+  }
+
+  @override
   void initState() {
 
     setState(() {
@@ -79,7 +92,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Profile picture, location
                             Row(
                               children: [
                                 Container(
@@ -130,7 +142,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
                                 ),
                               ],
                             ),
-                            // Notification icon
                             Container(
                               height: 35,
                               width: 35,
@@ -168,7 +179,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
                           ),
                         )
                             : SizedBox.shrink(),
-                        // White search bar
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -383,7 +393,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   padding: const EdgeInsets.only(top: 18.0, bottom: 18),
                   child: ListView.builder(
                       padding: EdgeInsets.zero,
-                      // Set padding to EdgeInsets.zero
 
                       itemBuilder: (context, index) {
                         return
@@ -446,7 +455,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
       ),
     );
   }
-
 
 
 

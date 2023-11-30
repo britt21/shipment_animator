@@ -19,12 +19,10 @@ class _HistoryHomeState extends State<HistoryHome>
   final ScrollController _scrollController = ScrollController();
   late TabController _tabController;
   var opacitylevel = 0.0;
-  double paddvalue = 40.0;
+  double paddvalue = 0.0;
   double paddingstart = 50.0;
-  var istabchanged = "false";
 
 
-  double _fadeHeight = 0.0;
 
   @override
   void initState() {
@@ -33,36 +31,21 @@ class _HistoryHomeState extends State<HistoryHome>
       Future.delayed((Duration.zero),(){
         setState(() {
           paddingstart  = 0.0;
-          paddvalue  = 0.0;
-
+          paddvalue = 0.0;
 
         });
 
     });
-    _scrollController.addListener(_onScroll);
+
     _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(_onTabChanged);
 
   }
 
   void _onTabChanged() {
-    Future.delayed((Duration.zero),(){
-      setState(() {
-        istabchanged = "true";
-        paddvalue  = 0.0;
 
-      });
-
-    });
-  }
-
-  void _onScroll() {
     setState(() {
-      paddvalue  = 0.0;
-      paddingstart  = 0.0;
-
-
-
+      paddvalue = paddvalue == 0.0 ? 50.0: 0.0;
     });
   }
 
@@ -170,6 +153,7 @@ class _HistoryHomeState extends State<HistoryHome>
 
 
 
+
                         ],
 
                       ),
@@ -203,12 +187,12 @@ class _HistoryHomeState extends State<HistoryHome>
   Widget setTabs(int index){
     if(index == 0){
       return AnimatedOpacity(
-        opacity: 1  ,
+        opacity: 1.0  ,
         duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
 
         child: AnimatedPadding(
           padding: EdgeInsets.only(top: paddvalue),
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 200),
 
           child: Column(
             children: [
@@ -229,7 +213,7 @@ class _HistoryHomeState extends State<HistoryHome>
 
         child: AnimatedPadding(
           padding: EdgeInsets.only(top: paddvalue),
-          duration: Duration(milliseconds: 400),
+          duration: Duration(milliseconds: 200),
 
           child: Column(
             children: [
@@ -253,9 +237,10 @@ class _HistoryHomeState extends State<HistoryHome>
 
         child: AnimatedPadding(
           padding: EdgeInsets.only(top: paddvalue),
-          duration: Duration(milliseconds: 500),
+          duration: Duration(milliseconds: 200),
 
           child: Column(
+            
             children: [
               AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 300), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
               AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 400), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
@@ -271,8 +256,9 @@ class _HistoryHomeState extends State<HistoryHome>
         duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
 
         child: AnimatedPadding(
-          padding: EdgeInsets.only(top: paddingstart),
-          duration: Duration(milliseconds: 500),
+          padding: EdgeInsets.only(top: paddvalue),
+          duration: Duration(milliseconds: 200),
+
 
           child: Column(
             children: [

@@ -40,11 +40,9 @@ class _MoveMateHomeState extends State<MoveMateHome> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           automaticallyImplyLeading: false, // Disable back arrow
-          flexibleSpace: SingleChildScrollView(
-            child: Container(
+          flexibleSpace: Container(
 
-              decoration: BoxDecoration(),
-            ),
+            decoration: BoxDecoration(),
           ),
           title: Text(
             "MoveMate",
@@ -52,69 +50,72 @@ class _MoveMateHomeState extends State<MoveMateHome> {
           ),
         ),
         body: Center(
-          child: Column(
-            children: [
-              Container(
-                height: 200,
-                width: 200,
-                child: SvgPicture.asset(movemate), // Replace with your SVG asset
-              ),
-              Container(
-                height: 150,
-                width: 150,
-                child: SvgPicture.asset(esybox), // Replace with your SVG asset
-              ),
-              Text(
-                "Total Estimate Amount",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MoneyCountAnimation(targetAmount: totalAmount),
+          child: SingleChildScrollView(
 
-                  Text(
-                    " USD",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.green,
+            child: Column(
+              children: [
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: SvgPicture.asset(movemate), // Replace with your SVG asset
+                ),
+                Container(
+                  height: 150,
+                  width: 150,
+                  child: SvgPicture.asset(esybox), // Replace with your SVG asset
+                ),
+                Text(
+                  "Total Estimate Amount",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MoneyCountAnimation(targetAmount: totalAmount),
+
+                    Text(
+                      " USD",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.green,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 30),
-                child: Text(
-                  "This Amount is estimated this will vary\nif you change your location or weigh",
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 30),
+                  child: Text(
+                    "This Amount is estimated this will vary\nif you change your location or weigh",
+                    style: TextStyle(
+                      color: Colors.grey.shade700,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    height: 45,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Get.offAll(() =>HomeDashboard());
-                        // Add your button onPressed logic here
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.orange.shade600, // Button color
-                        onPrimary: Colors.white, // Text color
+                Row(
+                  children: [
+                    Container(
+                      height: 45,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.offAll(() =>HomeDashboard());
+                          // Add your button onPressed logic here
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.orange.shade600, // Button color
+                          onPrimary: Colors.white, // Text color
+                        ),
+                        child: Text('Back to home'),
                       ),
-                      child: Text('Back to home'),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
