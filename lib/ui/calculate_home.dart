@@ -25,7 +25,6 @@ class _CalculateHomeState extends State<CalculateHome> {
   @override
   void initState() {
     super.initState();
-
     // Delay the animation to start after the build is complete
     Future.delayed(Duration.zero, () {
       setState(() {

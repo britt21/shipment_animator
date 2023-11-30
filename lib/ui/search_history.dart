@@ -19,7 +19,9 @@ class _HistoryHomeState extends State<HistoryHome>
   final ScrollController _scrollController = ScrollController();
   late TabController _tabController;
   var opacitylevel = 0.0;
-  double paddvalue = 0.0;
+  double paddvalue = 40.0;
+  double paddingstart = 50.0;
+  var istabchanged = "false";
 
 
   double _fadeHeight = 0.0;
@@ -28,6 +30,15 @@ class _HistoryHomeState extends State<HistoryHome>
   void initState() {
 
     super.initState();
+      Future.delayed((Duration.zero),(){
+        setState(() {
+          paddingstart  = 0.0;
+          paddvalue  = 0.0;
+
+
+        });
+
+    });
     _scrollController.addListener(_onScroll);
     _tabController = TabController(length: 5, vsync: this);
     _tabController.addListener(_onTabChanged);
@@ -35,24 +46,23 @@ class _HistoryHomeState extends State<HistoryHome>
   }
 
   void _onTabChanged() {
-    setState(() {
-      paddvalue = paddvalue == 0.0 ? 30.0: 0.0;
+    Future.delayed((Duration.zero),(){
+      setState(() {
+        istabchanged = "true";
+        paddvalue  = 0.0;
 
-      if(_tabController.index == 0){
-         opacitylevel = 0  ;
-      }else{
-        opacitylevel = 1  ;
-
-
-      }
-
+      });
 
     });
   }
 
   void _onScroll() {
     setState(() {
-      _fadeHeight = _scrollController.offset;
+      paddvalue  = 0.0;
+      paddingstart  = 0.0;
+
+
+
     });
   }
 
@@ -129,93 +139,153 @@ class _HistoryHomeState extends State<HistoryHome>
           ),
           centerTitle: true,
         ),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
+        body: AnimatedPadding(
+          duration: Duration(milliseconds: 800),
+          padding: EdgeInsets.only(top: paddingstart),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
 
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Row(
-                            children: [
-                              Text("Shipments", style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20)),
-                            ],
-                          ),
-                        ),
-                        // Use a Column with children instead of ListView.builder
-
-                        _tabController.index == 0
-                            ? AnimatedOpacity(
-                          opacity: 1  ,
-                          duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
-
-                          child: AnimatedPadding(
-                            padding: EdgeInsets.only(top: paddvalue),
-                            duration: Duration(milliseconds: 500),
-
-                            child: Column(
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Row(
                               children: [
-                                ShipmentHistoryContainer(paddvalue: paddvalue,),
-                                ShipmentHistoryContainer(paddvalue: paddvalue),
-                                ShipmentHistoryContainer(paddvalue: paddvalue),
-                                ShipmentHistoryContainer(paddvalue: paddvalue),
+                                Text("Shipments", style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20)),
                               ],
                             ),
                           ),
-                        )
-                            : AnimatedOpacity(
-                          opacity: 1  ,
-                          duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
-                              child: AnimatedPadding(
-                                padding: EdgeInsets.only(top: paddvalue),
-                                duration: Duration(milliseconds: 500),
-                                child: Column(
-                                  children: [
-                                    ShipmentHistoryContainer(paddvalue: paddvalue),
-                                    ShipmentHistoryContainer(paddvalue: paddvalue),
-                                  ],
-                                ),
-                              ),
-                            )
+                          // Use a Column with children instead of ListView.builder
+
+                          _tabController.index == 0
+                              ? setTabs(_tabController.index)
+                              :setTabs2(_tabController.index)
 
 
 
-                      ],
+                        ],
 
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            // White fade effect above the list but not with the list
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 150,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [litterwhitefade, litterwhitefadelitter],
+              // White fade effect above the list but not with the list
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 150,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [litterwhitefade, litterwhitefadelitter],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ),);
   }
 
+  Widget setTabs(int index){
+    if(index == 0){
+      return AnimatedOpacity(
+        opacity: 1  ,
+        duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
+
+        child: AnimatedPadding(
+          padding: EdgeInsets.only(top: paddvalue),
+          duration: Duration(milliseconds: 500),
+
+          child: Column(
+            children: [
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 300), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 400), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 500), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 600), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+
+            ],
+          ),
+        ),
+      );
+    }else{
+
+     return AnimatedOpacity(
+        opacity: 0,
+        duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
+
+        child: AnimatedPadding(
+          padding: EdgeInsets.only(top: paddvalue),
+          duration: Duration(milliseconds: 400),
+
+          child: Column(
+            children: [
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 200), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 300), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 400), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 500), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+
+            ],
+          ),
+        ),
+      );
+
+    }
+  }
+  Widget setTabs2(int index){
+    if(index > 0){
+      return AnimatedOpacity(
+        opacity: 1  ,
+        duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
+
+        child: AnimatedPadding(
+          padding: EdgeInsets.only(top: paddvalue),
+          duration: Duration(milliseconds: 500),
+
+          child: Column(
+            children: [
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 300), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 400), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+
+            ],
+          ),
+        ),
+      );
+    }else{
+
+     return AnimatedOpacity(
+        opacity: 0,
+        duration: Duration(milliseconds: 500), // Adjust the duration to make it slower
+
+        child: AnimatedPadding(
+          padding: EdgeInsets.only(top: paddingstart),
+          duration: Duration(milliseconds: 500),
+
+          child: Column(
+            children: [
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 300), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+              AnimatedPadding(padding: EdgeInsets.only(top: paddingstart), duration: Duration(milliseconds: 400), child: ShipmentHistoryContainer(paddvalue: paddvalue,)),
+
+            ],
+          ),
+        ),
+      );
+
+    }
+  }
 
 
   @override

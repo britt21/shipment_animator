@@ -28,6 +28,9 @@ class _HomeDashboardState extends State<HomeDashboard> {
   @override
   void initState() {
 
+    setState(() {
+      print("HOME HOME");
+    });
 
       Future.delayed(Duration.zero,() {
         setState(() {
@@ -48,16 +51,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
     print("GOATED");
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) {
-      setState(() {
-        selectedTabIndex = 0;
-      });
-    }
-    // This block will be executed when the app is resumed (comes to the foreground)
-    print("App resumed");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -453,6 +446,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
       ),
     );
   }
+
 
 
 
