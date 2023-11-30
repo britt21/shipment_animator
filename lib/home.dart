@@ -22,10 +22,21 @@ class _HomeDashboardState extends State<HomeDashboard> {
   FocusNode searchFocusNode = FocusNode();
   bool isBoatMoved = false;
   int selectedTabIndex = 0;
+  double boatpadding = 50.0;
 
 
   @override
   void initState() {
+
+
+      Future.delayed(Duration.zero,() {
+        setState(() {
+
+          boatpadding = 0.0;
+
+      });
+
+    });
     searchFocusNode.addListener(() {
       setState(() {
         print("FOCUS NODE : ${searchFocusNode.hasFocus}");
@@ -33,6 +44,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
         paddvalue = paddvalue == 0.0 ? 10.0 : 0.0;
       });
     });
+
+    print("GOATED");
   }
 
   @override
@@ -317,27 +330,45 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
               Container(height: 200,
                   child: ListView.builder(itemBuilder: (context, index) {
-                    return Container(
-                      decoration: BoxDecoration(color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 100,
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text("Ocean flight"),
-                            Row(
-                              children: [
-                                Text("Internstional",
-                                  style: TextStyle(fontSize: 11),),
-                              ],
-                            ),
-                            Container(
-                                height: 100,
-                                width: 150,
-                                child: SvgPicture.asset(boat))
-                          ],
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Container(
+                        decoration: BoxDecoration(color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 100,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AnimatedPadding(
+                                duration: Duration(milliseconds: 300),
+                                padding:  EdgeInsets.only(left: boatpadding),
+
+                                child: Column(
+                                  children: [
+                                    Text("Ocean flight",style: TextStyle(fontSize: 15),),
+                                    Row(
+                                      children: [
+                                        Text("Internstional",
+                                          style: TextStyle(fontSize: 11),),
+                                      ],
+                                    ),
+
+                                  ],
+
+                                ),
+                              ),
+                              Container(
+                                  height: 100,
+                                  width: 130,
+                                  child: AnimatedPadding(
+                                    duration: Duration(milliseconds: 300),
+                                    padding:  EdgeInsets.only(left: boatpadding),
+                                    child: SvgPicture.asset(boat),
+                                  ))
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -435,10 +466,10 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
         case 1:
 
-          Future.delayed(Duration(milliseconds: 300), ()
+          Future.delayed(Duration(milliseconds: 600), ()
           {
             Get.to(() => CalculateHome(), transition: Transition.fadeIn,
-                duration: Duration(milliseconds: 300));
+                duration: Duration(milliseconds: 600));
           });
           break;
 
@@ -446,7 +477,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
           Future.delayed(Duration(milliseconds: 300), ()
           {
             Get.to(() => HistoryHome(), transition: Transition.fadeIn,
-                duration: Duration(milliseconds: 300));
+                duration: Duration(milliseconds: 600));
           });
           break;
 
